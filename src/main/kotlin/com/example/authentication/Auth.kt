@@ -14,13 +14,16 @@ import io.ktor.server.routing.*
 fun Application.authRoutes(repository: CustomersRepository) {
 
     routing {
-//        route("api/v1") {
-//            post ("/auth/signUp") {
-//                val params = call.receive<CustomersForm>()
-//                val result = repository.signUpCustomer(params)
-//                call.respond(result.statusCode, result)
-//            }
-//        }
+
+        route("api/v1") {
+            post ("/auth/signUp") {
+                val requestBody = call.receiveText()
+                println("\nReceived request body: $requestBody\n")
+                val params = call.receive<CustomersForm>()
+                val result = repository.signUpCustomer(params)
+                call.respond(result.statusCode, result)
+            }
+        }
 
 //        route("api/v1") {
 //            post("/auth/signUp") {
@@ -36,20 +39,6 @@ fun Application.authRoutes(repository: CustomersRepository) {
 //            }
 //        }
 
-
-        route("api/v1") {
-            post("/auth/signUp") {
-                try {
-                    val requestBody = call.receiveText()
-                    println("Received request body: $requestBody")
-                    val params = call.receive<CustomersForm>()
-                    val result = repository.signUpCustomer(params)
-                    call.respond(result.statusCode, result)
-                } catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, "Invalid request body")
-                }
-            }
-        }
     }
 }
 
