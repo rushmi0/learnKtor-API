@@ -1,6 +1,5 @@
 package com.example.database.forms
 
-
 data class CustomersForm(
     val customerID: String,
     val userName: String,
