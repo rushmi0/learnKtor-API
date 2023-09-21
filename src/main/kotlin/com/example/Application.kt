@@ -14,9 +14,7 @@ fun main() {
 
 fun Application.module() {
     DatabaseFactory.initialize()
-
     configureAuth()
-
     configureSecurity()
     configureSerialization()
     configureDatabases()
