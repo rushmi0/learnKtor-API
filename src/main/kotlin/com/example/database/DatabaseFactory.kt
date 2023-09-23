@@ -2,7 +2,7 @@ package com.example.database
 
 
 import com.example.database.tables.AddressesTable
-import com.example.database.tables.CustomersTable
+import com.example.test.CustomersTable
 import com.example.database.tables.PeopleTable
 
 import com.zaxxer.hikari.HikariConfig

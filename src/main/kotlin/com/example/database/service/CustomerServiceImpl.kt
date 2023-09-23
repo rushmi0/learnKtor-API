@@ -4,7 +4,7 @@ package com.example.database.service
 import com.example.database.DatabaseFactory.dbQuery
 import com.example.database.fields.CustomersField
 import com.example.database.forms.CustomersForm
-import com.example.database.tables.CustomersTable
+import com.example.test.CustomersTable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
