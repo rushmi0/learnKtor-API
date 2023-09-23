@@ -10,7 +10,7 @@ class CustomersRepositoryImpl(
 ) : CustomersRepository {
 
     override suspend fun signUpCustomer(form: CustomersForm): BaseResponse<Any> {
-        return if (isUserNameExist(form.userName)) {
+        return if (isUserNameExist(form.UserName)) {
             BaseResponse.ErrorResponse(message = "User already Sign-up")
         } else {
             val user = userService.signupCustomer(form)

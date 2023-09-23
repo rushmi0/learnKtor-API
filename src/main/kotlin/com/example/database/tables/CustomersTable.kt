@@ -11,15 +11,13 @@ import java.time.format.DateTimeFormatter
 object CustomersTable : Table("Customers") {
 
     // กำหนดคอลัมน์ของตาราง
-    val customerID = varchar("CustomerID", 256)  // รหัสลูกค้า
-    val userName = varchar("UserName", 256).uniqueIndex()  // ชื่อผู้ใช้
+    val customerID = text("CustomerID")  // รหัสลูกค้า
+    val userName = text("UserName").uniqueIndex()  // ชื่อผู้ใช้
     val profileImage = text("ProfileImage")  // รูปโปรไฟล์
-    val authKey = varchar("AuthKey", 256)  // คีย์การยืนยันตัวตน
+    val authKey = text("AuthKey")  // คีย์การยืนยันตัวตน
+    val createAt = text("CreateAccountDate")
 
-    // กำหนดคอลัมน์ 'createAt' พร้อมค่าเริ่มต้น
-    val createAt = varchar("CreateAccountDate", 256)
-
-    val personID = varchar("PersonID", 256).references(PeopleTable.personID).uniqueIndex()  // รหัสบุคคล
+    val personID = text("PersonID").references(PeopleTable.personID).uniqueIndex()
 
     // กำหนด Primary Key
     override val primaryKey = PrimaryKey(customerID)
@@ -51,7 +49,7 @@ suspend fun main() {
 
     // ใช้ runBlocking หรือ coroutine scope เพื่อเรียกใช้ suspend function ใน coroutine
     runBlocking {
-        val success = createCustomer("ๅ", "test 1", "profile.jpg", "abc123", "2")
+        val success = createCustomer("1150", "test 1", "profile.jpg", "abc123", "2")
 
         // ตรวจสอบว่าการเพิ่มข้อมูลสำเร็จหรือไม่
         if (success) {

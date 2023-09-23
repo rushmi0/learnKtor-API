@@ -1,9 +1,10 @@
 package com.example.database.forms
 
+
 data class CustomersForm(
-    val customerID: String,
-    val userName: String,
-    val profileImage: String,
-    val authKey: String,
-    val personID: String
+    val CustomerID: String,
+    val UserName: String,
+    val ProfileImage: String,
+    val AuthKey: String,
+    val PersonID: String
 )

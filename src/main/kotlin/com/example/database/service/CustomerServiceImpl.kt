@@ -21,11 +21,11 @@ class CustomerServiceImpl : CustomerService {
         dbQuery {
             // สร้างและ execute INSERT statement เพื่อบันทึกข้อมูลลูกค้าใหม่ลงในฐานข้อมูล
             statement = CustomersTable.insert {
-                it[customerID] = form.customerID
-                it[userName] = form.userName
-                it[profileImage] = form.profileImage
-                it[authKey] = form.authKey
-                it[personID] = form.personID
+                it[customerID] = form.CustomerID
+                it[userName] = form.UserName
+                it[profileImage] = form.ProfileImage
+                it[authKey] = form.AuthKey
+                it[personID] = form.PersonID
             }
         }
         // คืนค่า CustomersField จากผลลัพธ์ของ INSERT statement
@@ -53,12 +53,12 @@ class CustomerServiceImpl : CustomerService {
         // เพื่อเข้าถึงข้อมูลใน ResultRow และสร้าง CustomersField object
         return row?.let {
             CustomersField(
-                customerID = it[CustomersTable.customerID],
-                userName = it[CustomersTable.userName],
-                profileImage = it[CustomersTable.profileImage],
-                authKey = it[CustomersTable.authKey],
-                createAt = it[CustomersTable.createAt],
-                personID = it[CustomersTable.personID]
+                CustomerID = it[CustomersTable.customerID],
+                UserName = it[CustomersTable.userName],
+                ProfileImage = it[CustomersTable.profileImage],
+                AuthKey = it[CustomersTable.authKey],
+                CreateAt = it[CustomersTable.createAt],
+                PersonID = it[CustomersTable.personID]
             )
         }
     }

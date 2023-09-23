@@ -15,29 +15,30 @@ fun Application.authRoutes(repository: CustomersRepository) {
 
     routing {
 
-        route("api/v1") {
-            post ("/auth/signUp") {
-                val requestBody = call.receiveText()
-                println("\nReceived request body: $requestBody\n")
-                val params = call.receive<CustomersForm>()
-                val result = repository.signUpCustomer(params)
-                call.respond(result.statusCode, result)
-            }
-        }
-
 //        route("api/v1") {
-//            post("/auth/signUp") {
-//                try {
-//                    val requestBody = call.receiveText()
-//                    println("Received request body: $requestBody")
-//                    val params = call.receive<CustomersForm>()
-//                    val result = repository.signUpCustomer(params)
-//                    call.respond(result.statusCode, result)
-//                } catch (e: Exception) {
-//                    call.respond(HttpStatusCode.BadRequest, "Invalid request body")
-//                }
+//            post ("/auth/signUp") {
+//                val requestBody = call.receiveText()
+//                println("\nReceived request body: $requestBody\n")
+//                val params = call.receive<CustomersForm>()
+//                println(params)
+//                val result = repository.signUpCustomer(params)
+//                call.respond(result.statusCode, result)
 //            }
 //        }
+
+        route("api/v1") {
+            post("/auth/signUp") {
+                try {
+                    val params = call.receive<CustomersForm>() // ใช้ call.receive แทน call.receiveOrNull
+                    println("Received CustomersForm: $params")
+                    val result = repository.signUpCustomer(params)
+                    call.respond(result.statusCode, result)
+                } catch (e: ContentTransformationException) {
+                    call.respond(HttpStatusCode.BadRequest, "Invalid request body format")
+                }
+            }
+
+        }
 
     }
 }
@@ -46,5 +47,5 @@ fun Application.authRoutes(repository: CustomersRepository) {
 fun Application.configureAuth() {
     val service: CustomerService = CustomerServiceImpl()
     val repository: CustomersRepository = CustomersRepositoryImpl(service)
-    authRoutes(repository)
+    this.authRoutes(repository)
 }
